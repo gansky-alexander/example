@@ -1,0 +1,222 @@
+services:
+    ### HIDDEN FROM THE MENU
+
+    admin.hair_color_translation:
+        class: App\Admin\HairColorTranslationAdmin
+        arguments: [ ~, App\Entity\HairColorTranslation, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: HairColorTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.skin_tone_translation:
+        class: App\Admin\SkinToneTranslationAdmin
+        arguments: [ ~, App\Entity\SkinToneTranslation, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: SkinToneTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.category_translation:
+        class: App\Admin\CategoryTranslationAdmin
+        arguments: [ ~, App\Entity\CategoryTranslation, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CategoryTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.badge_translation:
+        class: App\Admin\BadgeTranslationAdmin
+        arguments: [ ~, App\Entity\BadgeTranslation, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: BadgeTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.product_image:
+        class: App\Admin\ProductImageAdmin
+        arguments: [ ~, App\Entity\ProductImage, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ProductImage, show_in_dashboard: false }
+        public: true
+
+    sonata.media.admin.gallery:
+        class: '%sonata.media.admin.gallery.class%'
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false, label_catalogue: '%sonata.media.admin.media.translation_domain%', label_translator_strategy: 'sonata.admin.label.strategy.underscore' }
+        arguments:
+            - ~
+            - '%sonata.media.admin.gallery.entity%'
+            - '%sonata.media.admin.gallery.controller%'
+            - '@sonata.media.pool'
+        calls:
+            - [ setTranslationDomain, [ '%sonata.media.admin.media.translation_domain%' ] ]
+            - [ setTemplates, [ { list: 'SonataMediaBundle:GalleryAdmin:list.html.twig' } ] ]
+
+    admin.product_translation:
+        class: App\Admin\ProductTranslationAdmin
+        arguments: [ ~, App\Entity\ProductTranslation, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ProductTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.blog_tag_translation:
+        class: App\Admin\BlogTagTranslationAdmin
+        arguments: [ ~, App\Entity\BlogTagTranslation, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: BlogTagTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.order_entry:
+        class: App\Admin\OrderEntryAdmin
+        arguments:
+            - ~
+            - App\Entity\OrderEntry
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: OrderEntry, group: Order, show_in_dashboard: false }
+        public: true
+
+    admin.product_variant:
+        class: App\Admin\ProductVariantAdmin
+        arguments: [~, App\Entity\ProductVariant, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ProductVariant, show_in_dashboard: false }
+        public: true
+
+    admin.delivery_method_translation:
+        class: App\Admin\DeliveryMethodTranslationAdmin
+        arguments: [~, App\Entity\DeliveryMethodTranslation, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: DeliveryMethodTranslation, show_in_dashboard: false }
+        public: true
+
+    admin.box_item:
+        class: App\Admin\BoxItemAdmin
+        arguments: [~, App\Entity\BoxItem, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: BoxItem, show_in_dashboard: false }
+        public: true
+
+    ### ADMINS
+    admin.customer:
+        class: App\Admin\CustomerAdmin
+        arguments: [ ~, App\Entity\Customer, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Customers list', group: Customer, icon: '<i class="fa fa-user"></i>' }
+        public: true
+
+    admin.hair_color:
+        class: App\Admin\HairColorAdmin
+        arguments: [ ~, App\Entity\HairColor, ~ ]
+        calls:
+            - [ setTemplate, [ 'show', 'Admin/HairColor/show.html.twig' ] ]
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Hair color', group: Parameters, icon: '<i class="fa fa-filter"></i>' }
+        public: true
+
+    admin.skin_tone:
+        class: App\Admin\SkinToneAdmin
+        arguments: [ ~, App\Entity\SkinTone, ~ ]
+        calls:
+            - [ setTemplate, [ 'show', 'Admin/SkinTone/show.html.twig' ] ]
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Skin tone', group: Parameters }
+        public: true
+
+    admin.store:
+        class: App\Admin\StoreAdmin
+        arguments: [ ~, App\Entity\Store, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Stores', group: Parameters }
+        public: true
+
+    admin.brand:
+        class: App\Admin\BrandAdmin
+        arguments: [ ~, App\Entity\Brand, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Brands', group: Parameters }
+        public: true
+
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        arguments: [ ~, App\Entity\Category, ~ ]
+        calls:
+            - [ setTemplate, [ 'show', 'Admin/Category/show.html.twig' ] ]
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Category', group: Products, icon: '<i class="fa fa-gift"></i>' }
+        public: true
+
+    admin.product:
+        class: App\Admin\ProductAdmin
+        arguments: [ ~, App\Entity\Product, ~ ]
+        calls:
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Product, group: Products, icon: '<i class="fa fa-gift"></i>' }
+        public: true
+
+    admin.badge:
+        class: App\Admin\BadgeAdmin
+        arguments: [ ~, App\Entity\Badge, ~ ]
+        calls:
+            - [ setTemplate, [ 'show', 'Admin/Badge/show.html.twig' ] ]
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Badge, group: Products, icon: '<i class="fa fa-gift"></i>' }
+        public: true
+
+    admin.blog_tag:
+        class: App\Admin\BlogTagAdmin
+        arguments: [ ~, App\Entity\BlogTag, ~ ]
+        calls:
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Tag, group: Blog, icon: '<i class="fa fa-newspaper-o"></i>' }
+        public: true
+
+    admin.blog:
+        class: App\Admin\BlogAdmin
+        arguments: [ ~, App\Entity\Blog, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Blog, group: Blog, icon: '<i class="fa fa-newspaper-o"></i>' }
+        public: true
+
+    admin.order:
+        class: App\Admin\OrderAdmin
+        arguments:
+            - ~
+            - App\Entity\Order
+            - App\Controller\Admin\OrderController
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Order, group: Order, icon: '<i class="fa fa-shopping-cart "></i>' }
+        public: true
+
+    admin.delivery_method:
+        class: App\Admin\DeliveryMethodAdmin
+        arguments: [~, App\Entity\DeliveryMethod, ~]
+        calls:
+            - [ setLocales, [ '%locales%' ] ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Delivery method', group: Order, icon: '<i class="fa fa-shopping-cart "></i>' }
+        public: true
+
+    admin.color:
+        class: App\Admin\ColorAdmin
+        arguments: [~, App\Entity\Color, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Color, group: Parameters }
+        public: true
+
+    admin.review:
+        class: App\Admin\ReviewAdmin
+        arguments: [~, App\Entity\Review, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Review, group: Reviews, icon: '<i class="fa fa-star"></i>' }
+        public: true
+
+    admin.box:
+        class: App\Admin\BoxAdmin
+        arguments: [~, App\Entity\Box, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Order, label: Box }
+        public: true

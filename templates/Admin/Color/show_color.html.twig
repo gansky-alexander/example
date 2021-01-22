@@ -1,0 +1,13 @@
+<tr>
+    <th>
+        Color
+    </th>
+    <td>
+        {% if object.color %}
+            <div style="background-color: {{ object.color }}; width: 150px; height: 150px;">
+            </div>
+        {% else %}
+            <span>No color</span>
+        {% endif %}
+    </td>
+</tr>

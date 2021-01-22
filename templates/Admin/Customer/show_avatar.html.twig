@@ -1,0 +1,10 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+{% block field %}
+    <tr>
+        {% if object.avatar != null %}
+            <img style="max-height: 150px; max-width: 150px;" src="{{ object.avatar }}">
+        {% else %}
+            <span>No image</span>
+        {% endif %}
+    </tr>
+{% endblock %}

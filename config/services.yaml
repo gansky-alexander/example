@@ -1,0 +1,48 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+imports:
+    - { resource: services/workflows.yaml }
+    - { resource: services/admin.yaml }
+    - { resource: services/serializer.yaml }
+
+parameters:
+    server_host: '%env(SERVER_HOST)%'
+    mailer_from: '%env(MAILER_FROM)%'
+    locales:
+        - 'ru'
+        - 'en'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+    Yokai\SonataWorkflow\Controller\WorkflowController:
+        autowire: true
+        tags: ['controller.service_arguments']
+
+    App\Helper\ServerHostData:
+        class: App\Helper\ServerHostData
+        arguments:
+            - '%server_host%'
+
+    App\EventListener\LocaleListener:
+        arguments:
+            - '%kernel.default_locale%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }

@@ -1,0 +1,54 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <table>
+            <tr>
+                <th>Shipment</th>
+                <th>Billing</th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <b>Shipment address:</b> {{ object.shipmentAddress }}
+                        </li>
+                        <li>
+                            <b>Shipment address 2:</b> {{ object.shipmentAddress2 }}
+                        </li>
+                        <li>
+                            <b>Shipment city:</b> {{ object.shipmentCity }}
+                        </li>
+                        <li>
+                            <b>Shipment zip:</b> {{ object.shipmentZip }}
+                        </li>
+                        <li>
+                            <b>Is shipment same as billing:</b>
+                            {% if object.isShipmentSameAsBilling %}
+                                <span class="badge" style="background-color: darkgreen">Yes</span>
+                            {% else %}
+                                <span class="badge" style="background-color: red">No</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <b>Billing address:</b> {{ object.billingAddress }}
+                        </li>
+                        <li>
+                            <b>Billing address 2:</b> {{ object.billingAddress2 }}
+                        </li>
+                        <li>
+                            <b>Billing city:</b> {{ object.billingCity }}
+                        </li>
+                        <li>
+                            <b>Billing zip:</b> {{ object.billingZip }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

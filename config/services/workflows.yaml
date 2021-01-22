@@ -1,0 +1,12 @@
+services:
+    app.admin.extension.workflow.order:
+        class: Yokai\SonataWorkflow\Admin\Extension\WorkflowExtension
+        arguments:
+            - '@workflow.registry'
+            - transitions_icons:
+                  new: 'fa fa-cart-plus'
+                  in_progress: 'fa fa-spinner'
+                  closed: 'fa fa-check'
+              dropdown_transitions_label: Order statuses
+              workflow_name: order
+              no_transition_label: No transition for order

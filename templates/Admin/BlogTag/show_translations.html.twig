@@ -1,0 +1,19 @@
+<tr>
+    <th>
+        Translations
+    </th>
+    <td>
+        <table class="table">
+            <tr>
+                <th>Locale</th>
+                <th>Name</th>
+            </tr>
+            {% for translate in object.translations %}
+                <tr>
+                    <td>{{ translate.locale }}</td>
+                    <td>{{ translate.name }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </td>
+</tr>

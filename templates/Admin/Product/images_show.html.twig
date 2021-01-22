@@ -1,0 +1,25 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Is main</th>
+            </tr>
+
+        {% for image in object.productImages %}
+            <tr>
+                <th>
+                    {% thumbnail image.mediaImage, 'small' %}
+                </th>
+                <th>
+                    {% if image.isMain %}
+                        <span class="label label-success">yes</span>
+                    {% endif %}
+                </th>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

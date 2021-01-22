@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+{% block field %}
+    <div>
+        {% if object.reviewFiles|length > 0 %}
+            {% for file in object.reviewFiles %}
+                <img src="{{ file.path }}" style="max-width: 150px; max-height: 150px;"/>
+            {% endfor %}
+        {% else %}
+            <span>No files</span>
+        {% endif %}
+    </div>
+{% endblock %}

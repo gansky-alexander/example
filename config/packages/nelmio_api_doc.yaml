@@ -1,0 +1,21 @@
+nelmio_api_doc:
+    models: { use_jms: false }
+    documentation:
+        info:
+            title: FYNE
+            description: API for mobile application.
+                To authorize in API please use "X-AUTH-TOKEN"
+                http header with Customer's token value.
+                To translate some content please use "X-LOCALE" http header (e.g. 'en', 'ru').
+            version: 1.0.0
+        securityDefinitions:
+            token:
+                type: apiKey
+                description: 'Value: token'
+                name: 'X-AUTH-TOKEN'
+                in: header
+            security:
+                - token: [ ]
+    areas:
+        default:
+            path_patterns: [ ^/api/v1 ]

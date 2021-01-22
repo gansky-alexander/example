@@ -1,0 +1,14 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+{% block field %}
+    <td>
+        {% if object.status == constant('App\\Entity\\Order::STATUS_NEW') %}
+            <span class="badge" style="background-color: #337ab7;">New</span>
+        {% elseif object.status == constant('App\\Entity\\Order::STATUS_IN_PROGRESS') %}
+            <span class="badge" style="background-color: #ffc107;">In progress</span>
+        {% elseif object.status == constant('App\\Entity\\Order::STATUS_COMPLETE') %}
+            <span class="badge" style="background-color: #4caf50;">Complete</span>
+        {% elseif object.status == constant('App\\Entity\\Order::STATUS_CANCELED') %}
+            <span class="badge" style="background-color: #dd4b39;">Canceled</span>
+        {% endif %}
+    </td>
+{% endblock %}

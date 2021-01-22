@@ -1,0 +1,12 @@
+<tr>
+    <th>
+        Image
+    </th>
+    <td>
+        {% if object.image != null %}
+            <img style="max-height: 150px; max-width: 150px;" src="{{ object.image }}">
+        {% else %}
+            <span>No image</span>
+        {% endif %}
+    </td>
+</tr>

@@ -1,0 +1,32 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: php:7.4.10
+
+definitions:
+  services:
+    mysql:
+      image: mysql:5.7
+      variables:
+        MYSQL_DATABASE: 'fyne'
+        MYSQL_ROOT_PASSWORD: '12345678'
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - composer
+        script:
+          - apt-get update && apt-get install -y unzip git rsync zip libzip-dev libmcrypt-dev libxml2-dev zlib1g-dev pkg-config libxml2-dev zlib1g-dev
+          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          - docker-php-ext-install zip pdo_mysql opcache
+          - docker-php-ext-enable zip
+          - composer install
+          - bin/console doctrine:database:create -vvv
+          - bin/console doctrine:schema:update --force -vvv
+          - bin/console doctrine:fixtures:load -n -vvv
+          - bin/console doctrine:schema:validate -vvv
+
+

@@ -1,0 +1,39 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <table>
+            <tr>
+                <th>SKU</th>
+                <th>Price</th>
+                <th>Old Price</th>
+                <th>Stock Amount</th>
+                <th>Size</th>
+                <th>Color</th>
+            </tr>
+
+            {% for variant in object.productVariants %}
+                <tr>
+                    <td>
+                        {{ variant.sku }}
+                    </td>
+                    <td>
+                        {{ variant.price }}
+                    </td>
+                    <td>
+                        {{ variant.oldPrice }}
+                    </td>
+                    <td>
+                        {{ variant.stockAmount }}
+                    </td>
+                    <td>
+                        {{ variant.size }}{{ variant.sizeType }}
+                    </td>
+                    <td>
+                        {{ variant.color }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

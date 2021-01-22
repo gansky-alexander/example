@@ -1,0 +1,73 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <table>
+            <tr>
+                <th>$</th>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Parameters</th>
+            </tr>
+
+            {% for entry in object.entries %}
+                <tr>
+                    <td>
+                        <ul>
+                            <li>
+                                <b>Quantity:</b> {{ entry.quantity }}
+                            </li>
+                            <li>
+                                <b>Price:</b> {{ entry.price }}
+                            </li>
+                            <li>
+                                <b>Amount:</b> {{ entry.amount }}
+                            </li>
+                        </ul>
+                    </td>
+                    <td>{{ entry.productVariant.product.nameDefault }}</td>
+                    <td>{{ entry.productVariant.sku }}</td>
+                    <td>{{ entry.productVariant.product.brand }}</td>
+                    <td>
+                        {% for category in entry.productVariant.product.categories %}
+                            {{ category.nameDefault }},
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                <b>Size:</b> {{ entry.productVariant.size }} {{ entry.productVariant.sizeType.translate.name }}
+                            </li>
+                            <li>
+                                <b>Color:</b> {{ entry.productVariant.color.name }}
+                            </li>
+                            <li>
+                                <b>Hair color:</b> {{ entry.productVariant.product.hairColor }}
+                            </li>
+                            <li>
+                                <b>Badges: </b>
+                                {% for badge in entry.productVariant.product.badges %}
+                                    {{ badge }},
+                                {% endfor %}
+                            </li>
+                            <li>
+                                <b>Rating:</b> {{ entry.productVariant.product.rating }}
+                            </li>
+                            <li>
+                                <b>Count of reviews:</b> {{ entry.productVariant.product.amountOfReviews }}
+                            </li>
+                            <li>
+                                <b>Is active:</b> {{ entry.productVariant.product.isActive }}
+                            </li>
+                            <li>
+                                <b>Used for box:</b> {{ entry.productVariant.product.usedForBox }}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

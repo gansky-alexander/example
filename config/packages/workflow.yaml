@@ -1,0 +1,26 @@
+framework:
+    workflows:
+        order:
+            type: state_machine
+            marking_store:
+                type: single_state
+                arguments:
+                    - status
+            supports:
+                - App\Entity\Order
+            places:
+                - new
+                - in_progress
+                - complete
+                - canceled
+            initial_place: new
+            transitions:
+                start_progress:
+                    from: new
+                    to: in_progress
+                complete:
+                    from: in_progress
+                    to: complete
+                cancel:
+                    from: in_progress
+                    to: canceled

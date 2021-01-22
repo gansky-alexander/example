@@ -1,0 +1,31 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <table>
+            <tr>
+                <th>Locale</th>
+                <th>Name</th>
+                <th>Short description</th>
+                <th>Description</th>
+            </tr>
+
+            {% for translation in object.translations %}
+                <tr>
+                    <td>
+                        {{ translation.locale }}
+                    </td>
+                    <td>
+                        {{ translation.name }}
+                    </td>
+                    <td>
+                        {{ translation.shortDescription }}
+                    </td>
+                    <td>
+                        {{ translation.description }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
